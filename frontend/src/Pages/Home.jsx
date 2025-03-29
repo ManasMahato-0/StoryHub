@@ -4,6 +4,7 @@ import { Book, Search, User, ChevronDown, Plus, Check, X, Clock } from 'lucide-r
 import { SectionCard } from '../components/SectionCard';
 import { Navbar } from '../components/navbar'; 
 import { Default } from './Default';
+import BookGrid from './BookGrid'
 
 export function Home() {
     const navigate = useNavigate();
@@ -94,6 +95,7 @@ export function Home() {
         <Plus className="h-7 w-7" strokeWidth={1.5} />
       </button>
       <Default/>
+      <BookGrid/>
     </div>
     );
 }

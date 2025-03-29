@@ -57,7 +57,13 @@ export function BookGrid() {
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
-    <div className="pt-32 pb-24 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto">
+    <div className="pt-32 pb-24 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto" 
+    style={{
+      backgroundImage: "url('/bg2.png')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}>
        <Navbar/>
       {selectedBook ? (
         <div className="glass-effect rounded-xl p-8">

@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 export function Signup() {
   const [fullName, setFullName] = useState("");
   const [Email, setEmail] = useState("");
@@ -19,22 +20,26 @@ export function Signup() {
     if (fullName.trim() === "") return toast.error("Full Name is required");
     if (Email.trim() === "") return toast.error("Email is required");
     if (!/\S+@\S+\.\S+/.test(Email)) return toast.error("Enter a valid email");
-    if (Password.length < 6) return toast.error("Password must be at least 6 characters");
+    if (Password.length < 6)
+      return toast.error("Password must be at least 6 characters");
 
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
-        email: Email,
-        password: Password,
-        fullName: fullName,
-      });
+      const response = await axios.post(
+        "http://localhost:3000/api/v1/user/signup",
+        {
+          email: Email,
+          password: Password,
+          fullName: fullName,
+        }
+      );
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userid", response.data.userId);
 
       setLoading(false);
       toast.success("Signup successful!");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -50,12 +55,18 @@ export function Signup() {
           {/* Logo & Title */}
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
-              <div className="size-12 rounded-xl bg-[#FFA725]/20 flex items-center justify-center 
-                group-hover:bg-[#FFA725]/30 transition-colors">
+              <div
+                className="size-12 rounded-xl bg-[#FFA725]/20 flex items-center justify-center 
+                group-hover:bg-[#FFA725]/30 transition-colors"
+              >
                 <MessageSquare className="size-6 text-[#FFA725]" />
               </div>
-              <h1 className="text-2xl font-bold text-[#6A9C89]">Create Account</h1>
-              <p className="text-[#6A9C89]/70">Get started with your free account</p>
+              <h1 className="text-2xl font-bold text-[#6A9C89]">
+                Create Account
+              </h1>
+              <p className="text-[#6A9C89]/70">
+                Get started with your free account
+              </p>
             </div>
           </div>
 
@@ -63,7 +74,9 @@ export function Signup() {
           <form className="space-y-6" onSubmit={handleSubmit}>
             {/* Full Name */}
             <div className="form-control">
-              <label className="label text-[#6A9C89] font-medium">Full Name</label>
+              <label className="label text-[#6A9C89] font-medium">
+                Full Name
+              </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <User className="size-5 text-[#6A9C89]/60" />
@@ -97,7 +110,9 @@ export function Signup() {
 
             {/* Password */}
             <div className="form-control">
-              <label className="label text-[#6A9C89] font-medium">Password</label>
+              <label className="label text-[#6A9C89] font-medium">
+                Password
+              </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Lock className="size-5 text-[#6A9C89]/60" />
@@ -124,16 +139,25 @@ export function Signup() {
             </div>
 
             {/* Signup Button */}
-            <button type="submit" className="btn w-full bg-[#FFA725] text-white font-bold hover:bg-[#e6951c] p-2" disabled={loading}>
+            <button
+              type="submit"
+              className="btn w-full bg-[#FFA725] text-white font-bold hover:bg-[#e6951c] p-2"
+              disabled={loading}
+            >
               {loading ? "Creating Account..." : "Create Account"}
             </button>
           </form>
+
+        
 
           {/* Sign-in Link */}
           <div className="text-center">
             <p className="text-[#6A9C89]/70">
               Already have an account?{" "}
-              <Link to="/signin" className="text-[#FFA725] font-medium hover:underline">
+              <Link
+                to="/signin"
+                className="text-[#FFA725] font-medium hover:underline"
+              >
                 Sign in
               </Link>
             </p>
@@ -143,7 +167,7 @@ export function Signup() {
 
       {/* Right side */}
       <AuthImagePattern
-       title= "Unfold Your Story"
+        title="Unfold Your Story"
         subtitle="Write, explore, and immerse yourself in a world of endless tales."
       />
     </div>

@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 export function Signin() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
@@ -30,7 +31,7 @@ export function Signin() {
       localStorage.setItem("userid", response.data.userId);
       setLoading(false);
       toast.success("Login successful!");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       return toast.error("Invalid Input");
     }
@@ -110,6 +111,8 @@ export function Signin() {
             </button>
           </form>
 
+          
+          
           {/* Sign-in Link */}
           <div className="text-center">
             <p className="text-[#6A9C89]">

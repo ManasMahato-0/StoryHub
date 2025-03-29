@@ -106,5 +106,17 @@ return res.status(411).json({
     message:"Error While Signing"
 })
 })
+  
+ router.post("/googleloggedin", (req, res) => {
+    const { name, email } = req.body;
+    
+    if (!name || !email) {
+        return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    console.log("Received user data:", name, email);
+    res.json({ message: "User data received successfully" });
+});
+
 
 export default router

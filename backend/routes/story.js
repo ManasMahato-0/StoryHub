@@ -159,6 +159,28 @@ router.get("/can-edit/:id", authMiddleware, async (req, res) => {
     }
 });
 
+router.post('collaborators/:id', authMiddleware, async (req, res) => {
+    try{
+        const { id } = req.params;
+        const { userId } = req.body;
 
+        const story = await Story.findById(id);
+        if (!story) {
+            return res.status(404).json({ message: "Story not found" });
+        }
 
+        if (story.collaborators.includes(userId)) {
+            return res.status(400).json({ message: "User is already a collaborator" });
+        }
+
+        story.collaborators.push(userId);
+        await story.save();
+
+        return res.status(200).json({ message: "User added as collaborator", story });
+    }
+    catch(err){
+        console.log(err);
+        return res.status(500).json({ message: "Error while adding collaborator" });
+    }
+});
 export default router;

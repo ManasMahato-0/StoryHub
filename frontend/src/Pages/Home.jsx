@@ -3,6 +3,7 @@ import { Book, Search, User, ChevronDown, Plus, Check, X, Clock } from 'lucide-r
 import { SectionCard } from '../components/SectionCard';
 import { Navbar } from '../components/navbar'; 
 import { Default } from './Default';
+
 export function Home(){
     return (
         <div className="min-h-screen bg-cover bg-center bg-fixed" 
@@ -11,6 +12,7 @@ export function Home(){
          }}>
       <Navbar />
       
+        
       <main className="pt-32 pb-24 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <SectionCard title="Continue Reading">

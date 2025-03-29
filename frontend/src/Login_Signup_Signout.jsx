@@ -27,7 +27,7 @@ export const GoogleOAuthLogin = () => {
         );
         console.log(response.data.message);
         console.log("Unique Signup Successful");
-        navigate("/signupgoogle");
+        navigate("/");
       } catch (error) {
         if (error.response && error.response.status === 400) {
           console.log(error.response.data.message);

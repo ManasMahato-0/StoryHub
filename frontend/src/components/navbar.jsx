@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Book, Search, User, ChevronDown, Plus, Check, X, Clock } from 'lucide-react';
 export function Navbar() {
   const [isGenresOpen, setIsGenresOpen] = useState(false);
+  const loggedinUser = localStorage.getItem('userName') || '';
   
   return (
     <nav className="fixed top-0 left-0 right-0 glass-effect shadow-lg z-50">
@@ -45,6 +46,7 @@ export function Navbar() {
               <Search className="absolute left-3 top-3 h-5 w-5 text-primary/60" />
             </div>
             <User className="h-7 w-7 text-primary hover:text-accent cursor-pointer transition-colors duration-200" strokeWidth={1.5} />
+            <p>{loggedinUser}</p>
           </div>
         </div>
       </div>

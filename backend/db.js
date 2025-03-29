@@ -93,6 +93,14 @@ const commentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+
+// Google Loggedin User Schema & Model
+const GoogleLoddedinUserSchema = new mongoose.Schema({
+  name: String,
+  email: String
+});
+
 export const User = mongoose.model("User", userSchema);
 export const Story = mongoose.model("Story", storySchema);
 export const Comment = mongoose.model("Comment", commentSchema);
+export const GoogleLoddedin = mongoose.model("GoogleLoddedinUserSchema", GoogleLoddedinUserSchema);

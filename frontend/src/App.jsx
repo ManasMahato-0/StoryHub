@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Book, Search, User, ChevronDown, Plus, Check, X, Clock } from 'lucide-react';
+import {Home} from './Home';
 
 function Navbar() {
   const [isGenresOpen, setIsGenresOpen] = useState(false);
@@ -67,8 +68,9 @@ function App() {
     <div className="min-h-screen bg-cover bg-center bg-fixed" 
          style={{ 
            backgroundImage:"url('/colorbg.jpeg')" ,
+           backgroundSize: "cover",
          }}>
-      <Navbar />
+      
       
       <main className="pt-32 pb-24 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -141,7 +143,9 @@ function App() {
       >
         <Plus className="h-7 w-7" strokeWidth={1.5} />
       </button>
+      <Home/>
     </div>
+    
   );
 }
 

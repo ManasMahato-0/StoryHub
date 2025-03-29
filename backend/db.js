@@ -1,67 +1,92 @@
-import mongoose from "mongoose"
-import dotenv from "dotenv"
-import { required } from "nodemon/lib/config";
-dotenv.config()
-mongoose.connect(process.env.DB_URL)
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
+mongoose.connect(process.env.DB_URL);
 
 const userSchema = new mongoose.Schema(
-    {
-      email: {
-        type: String,
-        required: true,
-        unique: true,
-      },
-      fullName: {
-        type: String,
-        required: true,
-      },
-      password: {
-        type: String,
-        required: true,
-        minlength: 6,
-      },
-      profilePic: {
-        type: String,
-        default: "",
-      },
-      collaborator: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Story",
-        },
-      ],
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    { timestamps: true }
-  );
-  const storySchema = new mongoose.Schema(
-    {
-      title: {
-        type: String,
-        required: true,
-      },
-      description: {
-        type: String,
-        required: true,
-      },
-      imageUrl: {
-        type: String,
-      },
-      authorId: {
+    fullName: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 6,
+    },
+    profilePic: {
+      type: String,
+      default: "",
+    },
+    collaborator: [
+      {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "Story",
+      },
+    ],
+  },
+  { timestamps: true }
+);
+
+const storySchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    imageUrl: {
+      type: String,
+    },
+    likes: {
+      type: Number,
+      default: 0,
+    },
+    authorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    genre: [
+      {
+        type: String,
+        enum: ["Fantasy", "Science Fiction", "Mystery", "Romance"],
         required: true,
       },
-      genre: [
-        {
-          type: String,
-          enum: ["Fantasy", "Science Fiction", "Mystery", "Romance"],
-          required: true,
-        },
-      ],
-    },
-    { timestamps: true }
-  );
-  
+    ],
+  },
+  { timestamps: true }
+);
 
-  export const User=mongoose.model("User",userSchema)
-  export const Story=mongoose.model("Story",userSchema)
+const commentSchema = new mongoose.Schema(
+  {
+    storyId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Story",
+      required: true,
+    },
+    comments: [
+      {
+        type: String,
+      },
+    ],
+  },
+  { timestamps: true }
+);
+
+export const User = mongoose.model("User", userSchema);
+export const Story = mongoose.model("Story", storySchema);
+export const Comment = mongoose.model("Comment", commentSchema);

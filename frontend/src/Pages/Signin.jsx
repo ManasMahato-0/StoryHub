@@ -106,7 +106,7 @@ export function Signin() {
 
             {/* Signup Button */}
             <button type="submit" className="btn w-full bg-[#FFA725] text-white font-bold hover:bg-[#e6951c] p-2" disabled={loading}>
-              {loading ? "Creating Account..." : "Create Account"}
+              {loading ? "Logging in..." : "Login"}
             </button>
           </form>
 

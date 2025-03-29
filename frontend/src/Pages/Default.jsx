@@ -1,7 +1,7 @@
 import React from 'react'
 import { Book, Search, User, ChevronDown, Plus, Check, X, Clock } from 'lucide-react';
 
-export const Home = () => {
+export const Default = () => {
   return (
     <div className='w-full h-screen' style={{ 
                backgroundImage:"url('/Homebg.png')",
@@ -28,9 +28,9 @@ export const Home = () => {
         </div>
       </div>
       </nav>
-      <div className='flex mt-10'>
-        <div className="text-xl font-bold">Publish your Imagination, your own way</div>
-        <div  className="text-lg font-semibold">Create your own unique and beautifull stories and share with world</div>
+      <div className='flex mt-10 justify-center flex-col'>
+        <div className="text-3xl font-bold">Publish your Imagination, your own way</div>
+        <div  className="text-xl font-semibold">Create your own unique and beautifull stories and share with world</div>
       </div> 
     </div>
   )

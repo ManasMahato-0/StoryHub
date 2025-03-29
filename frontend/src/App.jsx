@@ -8,6 +8,9 @@ import { Signin } from './Pages/Signin';
 import { Default } from './Pages/Default';
 import { CreateStory } from './Pages/CreateStory';
 import {Chapter} from './Pages/Chapter'
+import BookGrid from './Pages/BookGrid';
+import MostLiked from './Pages/MostLiked';
+import SortByGenre from './Pages/SortByGenre';
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
       <Route path='/default' element={<Default/>}></Route>
       <Route path='/createStory' element={<CreateStory/>}></Route>
       <Route path='/chapter' element={<Chapter></Chapter>}></Route>
+      <Route path='/stories' element={<BookGrid/>}></Route>
+      <Route path='/liked' element={<MostLiked/>}></Route>
+      <Route path='/genre' element={<SortByGenre/>}></Route>
     </Routes>
     </BrowserRouter>
   );

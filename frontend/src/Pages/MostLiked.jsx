@@ -4,7 +4,7 @@ import { ArrowLeft, Flag, MessageCircle } from 'lucide-react';
 import { Navbar } from '../components/NavBar';
 
 
-function BookGrid() {
+function MostLiked() {
   const [stories, setStories] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ function BookGrid() {
 
     const fetchStories = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/story/all', {
+        const response = await axios.get('http://localhost:3000/api/v1/story/most-liked', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -141,4 +141,4 @@ function BookGrid() {
   );
 }
 
-export default BookGrid;
+export default MostLiked;

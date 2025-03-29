@@ -1,6 +1,6 @@
 import express from "express";
 import { authMiddleware } from "../middleware.js";
-import { Story } from "../db.js";
+import { Story, User } from "../db.js";
 import cloudinary from "cloudinary";
 
 const router = express.Router();
@@ -18,11 +18,11 @@ const uploadToCloudinary = async (file) => {
 };
 router.post("/post", authMiddleware, async (req, res) => {
     try {
-        if (!req.files || !req.files.imageFile) {
-            return res.status(400).json({ message: "Upload all files" });
-        }
-        const imageFile = req.files.imageFile;
-        const imageUrl = await uploadToCloudinary(imageFile);
+        // if (!req.files || !req.files.imageFile) {
+        //     return res.status(400).json({ message: "Upload all files" });
+        // }
+        // const imageFile = req.files.imageFile;
+        const imageUrl =  null;
         const { title, description, content, likes, genre } = req.body;
         const authorId = req.userId;
         const story = await Story.create({
@@ -159,27 +159,48 @@ router.get("/can-edit/:id", authMiddleware, async (req, res) => {
     }
 });
 
-router.post('collaborators/:id', authMiddleware, async (req, res) => {
-    try{
+router.get("/author/:id", authMiddleware, async (req, res) => {
+    try {
         const { id } = req.params;
-        const { userId } = req.body;
+        const author = await User.findById(id).select("-password");
+
+        if (!author) {
+            return res.status(404).json({ message: "Author not found" });
+        }
+
+        return res.status(200).json(author);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Error while fetching author information" });
+    }
+});
+
+router.post("/collaborate/:id", authMiddleware, async (req, res) => {
+    try {
+        const userId = req.userId;
+        const { id } = req.params;
 
         const story = await Story.findById(id);
         if (!story) {
             return res.status(404).json({ message: "Story not found" });
         }
 
-        if (story.collaborators.includes(userId)) {
-            return res.status(400).json({ message: "User is already a collaborator" });
+        if (story.authorId.equals(userId)) {
+            return res.status(400).json({ message: "You are already the author of this story" });
         }
 
+        if (story.collaborators && story.collaborators.includes(userId)) {
+            return res.status(400).json({ message: "You are already a collaborator on this story" });
+        }
+
+        story.collaborators = story.collaborators || [];
         story.collaborators.push(userId);
+
         await story.save();
 
-        return res.status(200).json({ message: "User added as collaborator", story });
-    }
-    catch(err){
-        console.log(err);
+        return res.status(200).json({ message: "Successfully added as a collaborator", story });
+    } catch (error) {
+        console.log(error);
         return res.status(500).json({ message: "Error while adding collaborator" });
     }
 });

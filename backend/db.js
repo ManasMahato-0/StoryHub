@@ -66,13 +66,12 @@ const storySchema = new mongoose.Schema(
           ref: "User", // Reference to User model
         },
       ],
-      genre: [
+      genre: 
         {
           type: String,
-          enum: ["Fantasy", "Science Fiction", "Mystery", "Romance"],
+          enum: ["Fantasy", "Science Fiction", "Mystery", "Romance","Action"],
           required: true,
         },
-      ],
     },
     { timestamps: true }
   );  

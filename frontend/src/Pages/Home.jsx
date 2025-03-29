@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import { Book, Search, User, ChevronDown, Plus, Check, X, Clock } from 'lucide-react';
 import { SectionCard } from '../components/SectionCard';
 import { Navbar } from '../components/navbar'; 
 import { Default } from './Default';
-export function Home(){
+
+export function Home() {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/signin');
+        }
+    }, [navigate]);
+
     return (
         <div className="min-h-screen bg-cover bg-center bg-fixed" 
          style={{ 
-           backgroundImage:"url('/colorbg.jpeg')" ,
+           backgroundImage: "url('/colorbg.jpeg')",
          }}>
       <Navbar />
       
@@ -82,7 +93,6 @@ export function Home(){
       >
         <Plus className="h-7 w-7" strokeWidth={1.5} />
       </button>
-      <Default/>
     </div>
     );
 }

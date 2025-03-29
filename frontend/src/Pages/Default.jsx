@@ -3,9 +3,10 @@ import { Book, Search, User, ChevronDown, Plus, Check, X, Clock } from 'lucide-r
 
 export const Default = () => {
   return (
-    <div className='w-full h-screen' style={{ 
+    <div className='w-full h-screen items-center' style={{ 
                backgroundImage:"url('/Homebg.png')",
-               backgroundSize: 'cover',   
+               backgroundSize: 'cover', 
+                
              }}>
       <nav className="fixed top-0 left-0 right-0 bg-transparent ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,10 +29,14 @@ export const Default = () => {
         </div>
       </div>
       </nav>
-      <div className='flex mt-10 justify-center flex-col'>
-        <div className="text-3xl font-bold">Publish your Imagination, your own way</div>
-        <div  className="text-xl font-semibold">Create your own unique and beautifull stories and share with world</div>
-      </div> 
+      <div className='text-[#8AB2A6] justify-center items-center flex pt-56 flex-col  text-center'>
+      <div className="text-3xl font-bold">Publish your Imagination, your own way</div>
+      <div  className="text-xl font-semibold">Create your own unique and beautifull stories and share with world</div>
+      <button class="rounded-md w-1/6 m-6 bg-[#E07A5F] py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:[#F1E3D3] focus:shadow-none active:[#F1E3D3] hover:[#F1E3D3] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+     <span>Create Your Story</span>
+  </button>
+      </div>
+      
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Book, Search, User, ChevronDown, Plus, Check, X, Clock } from 'lucide-react';
-import { SectionCard } from './components/SectionCard';
+import { SectionCard } from '../components/SectionCard';
+import { Navbar } from '../components/navbar'; 
 export function Home(){
     return (
         <div className="min-h-screen bg-cover bg-center bg-fixed" 

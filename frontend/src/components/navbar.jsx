@@ -1,4 +1,6 @@
-function Navbar() {
+import React, { useState } from 'react';
+import { Book, Search, User, ChevronDown, Plus, Check, X, Clock } from 'lucide-react';
+export function Navbar() {
   const [isGenresOpen, setIsGenresOpen] = useState(false);
   
   return (

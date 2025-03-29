@@ -23,8 +23,9 @@ export function Home() {
          }}>
       <Navbar />
       
+        
       <main className="pt-32 pb-24 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <SectionCard title="Continue Reading">
             <div className="space-y-4">
               {['The Lost Kingdom', 'Starlight Chronicles', 'The Hidden Truth'].map((story) => (

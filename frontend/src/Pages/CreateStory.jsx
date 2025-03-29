@@ -105,7 +105,7 @@ export function CreateStory() {
               type="button"
               onClick={handleClick}
             >
-              <MessageCircle className="h-5 w-5 mr-2" />
+              <BookOpenCheck className="h-5 w-5 mr-2" />
               Publish
             </button>
           </div>

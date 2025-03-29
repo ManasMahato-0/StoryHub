@@ -97,7 +97,7 @@ export function CreateStory() {
               type="button"
             >
               <MessageCircle className="h-5 w-5 mr-2" />
-              Comment
+              Add Collaborators
             </button>
 
             <button
@@ -106,7 +106,7 @@ export function CreateStory() {
               onClick={handleClick}
             >
               <MessageCircle className="h-5 w-5 mr-2" />
-              Publish
+                Publish Story
             </button>
           </div>
         </div>

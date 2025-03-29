@@ -1,46 +1,49 @@
-import {React,useState} from 'react'
-import { useNavigate } from 'react-router-dom'; 
-import { Book, Search, User, ChevronDown, Plus, Check, X, Clock ,ArrowLeft, Flag,MessageCircle} from 'lucide-react';
-import { SectionCard } from '../components/SectionCard';
-import { Navbar } from '../components/navbar';
- 
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { ArrowLeft, Flag, MessageCircle } from 'lucide-react';
 
- function BookGrid() {
+function BookGrid() {
+  const [stories, setStories] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
-  
-  const books = [
-    {
-      id: 1,
-      title: "The Lost Kingdom",
-      author: "Elena Rivers",
-      cover: "https://images.unsplash.com/photo-1479894720049-e239d8e4d07c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-      publishDate: "2024-01-15",
-      language: "English",
-      genre: "Fantasy",
-      description: "In a world where magic is forbidden, a young princess discovers she possesses extraordinary powers that could either save her kingdom or destroy it. As dark forces gather at the borders of her realm, she must learn to master her abilities while keeping them hidden from those who would persecute her."
-    },
-    {
-      id: 2,
-      title: "Starlight Chronicles",
-      author: "Marcus Chen",
-      cover: "https://images.unsplash.com/photo-1614544048536-0d28caf77f41?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-      publishDate: "2024-02-20",
-      language: "English",
-      genre: "Science Fiction",
-      description: "Set in the year 3045, humanity has spread across the galaxy, establishing colonies on distant planets. But when mysterious signals begin emanating from an uncharted sector of space, a team of explorers must venture into the unknown, facing challenges that will test their courage and humanity."
-    },
-    {
-      id: 3,
-      title: "The Hidden Truth",
-      author: "Sarah Blake",
-      cover: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-      publishDate: "2024-03-01",
-      language: "English",
-      genre: "Mystery",
-      description: "Detective Anna Martinez thought she had seen everything in her twenty years on the force. But when a series of seemingly unrelated deaths leads her to uncover a centuries-old conspiracy, she realizes that some truths are better left hidden. Now she must decide whether to pursue justice or protect humanity from a truth that could tear society apart."
-    },
-    
-  ];
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    const fetchStories = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/v1/story/all', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setStories(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchStories();
+  }, []);
+
+  async function GetStory(id) {
+    try {
+      const response = await axios.get(`http://localhost:3000/api/v1/story/${id}`);
+      const storyData = response.data;
+      const authorResponse = await axios.get(`http://localhost:3000/api/v1/author/${storyData.authorId}`);
+      storyData.authorName = authorResponse.data.fullName;
+
+      setSelectedBook(storyData);
+    } catch (error) {
+      console.error("Error fetching story:", error);
+    }
+  }
+
+  if (loading) return <p className="text-center text-primary">Loading stories...</p>;
+  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
     <div className="pt-32 pb-24 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto">
@@ -56,7 +59,7 @@ import { Navbar } from '../components/navbar';
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <img 
-                src={selectedBook.cover} 
+                src={selectedBook.imageUrl} 
                 alt={selectedBook.title}
                 className="w-full h-[500px] object-cover rounded-xl shadow-lg"
               />
@@ -68,18 +71,13 @@ import { Navbar } from '../components/navbar';
               <div className="space-y-4">
                 <div>
                   <h2 className="text-lg font-semibold text-accent">Author</h2>
-                  <p className="text-primary">{selectedBook.author}</p>
+                  <p className="text-primary">{selectedBook.authorName}</p>
                 </div>
                 
-                <div>
+                {/* <div>
                   <h2 className="text-lg font-semibold text-accent">Published Date</h2>
                   <p className="text-primary">{new Date(selectedBook.publishDate).toLocaleDateString()}</p>
-                </div>
-                
-                <div>
-                  <h2 className="text-lg font-semibold text-accent">Language</h2>
-                  <p className="text-primary">{selectedBook.language}</p>
-                </div>
+                </div> */}
                 
                 <div>
                   <h2 className="text-lg font-semibold text-accent">Genre</h2>
@@ -100,8 +98,8 @@ import { Navbar } from '../components/navbar';
                   <Flag className="h-5 w-5 mr-2" />
                   Raise Issue
                 </button>
-                <button class="px-6 py-3 bg-[#E07A5F] text-background rounded-lg hover:bg-accent/90 transition-colors duration-200 flex items-center" type="button">
-                <MessageCircle className="h-5 w-5 mr-2"  />
+                <button className="px-6 py-3 bg-[#E07A5F] text-background rounded-lg hover:bg-accent/90 transition-colors duration-200 flex items-center">
+                  <MessageCircle className="h-5 w-5 mr-2" />
                   Comment
                 </button>
               </div>
@@ -110,11 +108,11 @@ import { Navbar } from '../components/navbar';
         </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {books.map((book) => (
+          {stories.map((book) => (
             <div 
-              key={book.id}
+              key={book._id}
               className="glass-effect rounded-xl p-4 cursor-pointer transform hover:scale-[1.02] transition-all duration-300"
-              onClick={() => setSelectedBook(book)}
+              onClick={() => GetStory(book._id)}
             >
               <img 
                 src={book.cover} 
@@ -122,7 +120,7 @@ import { Navbar } from '../components/navbar';
                 className="w-full h-64 object-cover rounded-lg shadow-md mb-4"
               />
               <h3 className="text-lg font-semibold text-primary">{book.title}</h3>
-              <p className="text-sm text-accent">{book.author}</p>
+              <p className="text-sm text-accent">{book.authorName}</p>
             </div>
           ))}
         </div>
@@ -130,4 +128,5 @@ import { Navbar } from '../components/navbar';
     </div>
   );
 }
+
 export default BookGrid;

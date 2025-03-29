@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Book, Search, User, ChevronDown, Plus, Check, X, Clock } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 export function Navbar() {
   const [isGenresOpen, setIsGenresOpen] = useState(false);
   const loggedinUser = localStorage.getItem('userName') || '';
@@ -14,7 +15,7 @@ export function Navbar() {
           </div>
           
           <div className="hidden md:flex items-center space-x-12">
-            <a href="#" className="text-primary hover:text-accent transition-colors duration-200 font-medium">Browse Stories</a>
+            <a href="#" className="text-primary hover:text-accent transition-colors duration-200 font-medium" onClick={()=>{navigate("/stories")}}>Browse Stories</a>
             <a href="#" className="text-primary hover:text-accent transition-colors duration-200 font-medium">Most Liked</a>
             <div className="relative">
               <button 

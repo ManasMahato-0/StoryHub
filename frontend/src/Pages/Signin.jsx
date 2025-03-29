@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { GoogleOAuthLogin } from '../Login_Signup_Signout';
+
 
 export function Signin() {
   const [Email, setEmail] = useState("");
@@ -31,7 +31,7 @@ export function Signin() {
       localStorage.setItem("userid", response.data.userId);
       setLoading(false);
       toast.success("Login successful!");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       return toast.error("Invalid Input");
     }
@@ -111,7 +111,7 @@ export function Signin() {
             </button>
           </form>
 
-          <GoogleOAuthLogin/>
+          
           
           {/* Sign-in Link */}
           <div className="text-center">

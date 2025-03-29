@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { GoogleOAuthLogin } from "../Login_Signup_Signout";
+
 
 export function Signup() {
   const [fullName, setFullName] = useState("");
@@ -39,7 +39,7 @@ export function Signup() {
 
       setLoading(false);
       toast.success("Signup successful!");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -148,7 +148,7 @@ export function Signup() {
             </button>
           </form>
 
-          <GoogleOAuthLogin />
+        
 
           {/* Sign-in Link */}
           <div className="text-center">

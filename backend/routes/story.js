@@ -106,6 +106,58 @@ router.get("/story", authMiddleware, async (req, res) => {
         return res.status(400).json({ message: "Error while fetching stories of this user" });
     }
 });
+router.get("/collaborations", authMiddleware, async (req, res) => {
+    try {
+        const userId = req.userId;
+        const stories = await Story.find({ collaborators: userId });
+        return res.status(200).json(stories);
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ message: "Error while fetching collaborations" });
+    }
+});
+router.put("/edit/:id", authMiddleware, async (req, res) => {
+    try {
+        const userId = req.userId; 
+        const { id } = req.params;
+        const { title, description, content, imageUrl, genre } = req.body;
+        const story = await Story.findById(id);
+        if (!story) {
+            return res.status(404).json({ message: "Story not found" });
+        }
+        const isAuthorized = story.authorId.equals(userId) || story.collaborators.includes(userId);
+        if (!isAuthorized) {
+            return res.status(403).json({ message: "You are not authorized to edit this story" });
+        }
+        story.title = title || story.title;
+        story.description = description || story.description;
+        story.content = content || story.content;
+        story.imageUrl = imageUrl || story.imageUrl;
+        story.genre = genre || story.genre;
+
+        await story.save();
+
+        return res.status(200).json({ message: "Story updated successfully", story });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Error while updating story" });
+    }
+});
+
+router.get("/can-edit/:id", authMiddleware, async (req, res) => {
+    try {
+        const userId = req.userId; 
+        const story = await Story.findById(id);
+        if (!story) {
+            return res.status(404).json({ message: "Story not found" });
+        }
+        const isAuthorized = story.authorId.equals(userId) || (story.collaborators && story.collaborators.includes(userId));
+        return res.status(200).json({ canEdit: isAuthorized });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Error while checking permissions" });
+    }
+});
 
 
 

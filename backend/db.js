@@ -35,41 +35,47 @@ const userSchema = new mongoose.Schema(
 );
 
 const storySchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    content: {
-      type: String,
-      required: true,
-    },
-    imageUrl: {
-      type: String,
-    },
-    likes: {
-      type: Number,
-      default: 0,
-    },
-    authorId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    genre: [
-      {
+    {
+      title: {
         type: String,
-        enum: ["Fantasy", "Science Fiction", "Mystery", "Romance"],
         required: true,
       },
-    ],
-  },
-  { timestamps: true }
-);
+      description: {
+        type: String,
+        required: true,
+      },
+      content: {
+        type: String,
+        required: true,
+      },
+      imageUrl: {
+        type: String,
+      },
+      likes: {
+        type: Number,
+        default: 0,
+      },
+      authorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      collaborators: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User", // Reference to User model
+        },
+      ],
+      genre: [
+        {
+          type: String,
+          enum: ["Fantasy", "Science Fiction", "Mystery", "Romance"],
+          required: true,
+        },
+      ],
+    },
+    { timestamps: true }
+  );  
 
 const commentSchema = new mongoose.Schema(
   {

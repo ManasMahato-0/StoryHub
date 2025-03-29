@@ -1,7 +1,6 @@
-import { Book, User } from "lucide-react";
 import { Navbar } from "../components/navbar";
 import { InputField } from "../components/InputField";
-
+import { Search, User, ChevronDown, Plus, Check, X, Clock ,ArrowLeft, Flag,MessageCircle} from 'lucide-react';
 export function CreateStory() {
     return (
         <div className="w-screen h-screen flex flex-col" 
@@ -44,7 +43,18 @@ export function CreateStory() {
                             placeholder="Start writing your story here..."
                         />
                     </div>
-
+                    <div>
+                <div className="flex space-x-4 pt-6">
+                <button class="px-6 py-3 bg-primary text-background rounded-lg hover:bg-accent/90 transition-colors duration-200 flex items-center" type="button">
+                <MessageCircle className="h-5 w-5 mr-2"  />
+                  Comment
+                </button>
+                <button class="px-6 py-3 bg-secondary text-background rounded-lg hover:bg-accent/90 transition-colors duration-200 flex items-center" type="button">
+                <MessageCircle className="h-5 w-5 mr-2"  />
+                  Comment
+                </button>
+                    </div>
+                    </div>
                 </div>
             </div>
 

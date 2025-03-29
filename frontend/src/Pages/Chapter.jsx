@@ -13,7 +13,7 @@ const chapterData = {
   ]
 };
 
-function Chapter() {
+export function Chapter() {
   return (
     <div className="min-h-screen bg-cream px-4 py-8 md:px-8">
       <Navbar />

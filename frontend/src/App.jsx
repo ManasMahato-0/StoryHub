@@ -6,6 +6,8 @@ import { Home } from './Pages/Home';
 import { Signup } from './Pages/Signup';
 import { Signin } from './Pages/Signin';
 import { Default } from './Pages/Default';
+import { CreateStory } from './Pages/CreateStory';
+import {Chapter} from './Pages/Chapter'
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
       <Route path='/signup' element={<Signup/>}></Route>
       <Route path='/signin' element={<Signin/>}></Route>
       <Route path='/default' element={<Default/>}></Route>
+      <Route path='/createStory' element={<CreateStory/>}></Route>
+      <Route path='/chapter' element={<Chapter></Chapter>}></Route>
     </Routes>
     </BrowserRouter>
   );

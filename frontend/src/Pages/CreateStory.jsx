@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Navbar } from "../components/navbar";
 import { InputField } from "../components/InputField";
-import { MessageCircle } from "lucide-react";
+import { BookOpenCheck,UserPlus} from "lucide-react";
 import { useNavigate } from 'react-router-dom'; 
 
 export function CreateStory() {
@@ -96,8 +96,8 @@ export function CreateStory() {
               className="px-6 py-3 bg-primary text-background rounded-lg hover:bg-accent/90 transition-colors duration-200 flex items-center"
               type="button"
             >
-              <MessageCircle className="h-5 w-5 mr-2" />
-              Comment
+              <UserPlus className="h-5 w-5 mr-2" />
+              Add Collaborater
             </button>
 
             <button
@@ -105,8 +105,8 @@ export function CreateStory() {
               type="button"
               onClick={handleClick}
             >
-              <MessageCircle className="h-5 w-5 mr-2" />
-              Publish
+              <BookOpenCheck className="h-5 w-5 mr-2" />
+              Publish Story
             </button>
           </div>
         </div>

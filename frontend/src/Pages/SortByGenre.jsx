@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ArrowLeft, Flag, MessageCircle } from 'lucide-react';
-import { Navbar } from '../components/NavBar';
+import { Navbar } from '../components/navbar';
 
 
 function SortByGenre() {

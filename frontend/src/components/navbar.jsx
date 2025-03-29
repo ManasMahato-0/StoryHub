@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Book, Search, User, ChevronDown, Plus, Check, X, Clock } from 'lucide-react';
+import { Book, Search, User, ChevronDown,Bell, Plus, Check, X, Clock } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 export function Navbar() {
   const [isGenresOpen, setIsGenresOpen] = useState(false);
@@ -46,8 +46,14 @@ export function Navbar() {
               />
               <Search className="absolute left-3 top-3 h-5 w-5 text-primary/60" />
             </div>
+            <a href="" className='no-underline'>
             <User className="h-7 w-7 text-primary hover:text-accent cursor-pointer transition-colors duration-200" strokeWidth={1.5} />
+            
+            </a>
+            <a href="" className='no-underline'>
+            <Bell className="h-7 w-7 text-primary hover:text-accent cursor-pointer transition-colors duration-200" strokeWidth={1.5} />
             <p>{loggedinUser}</p>
+            </a>
           </div>
         </div>
       </div>

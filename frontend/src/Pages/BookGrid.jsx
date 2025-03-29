@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ArrowLeft, Flag, MessageCircle } from 'lucide-react';
 
-function BookGrid() {
+export function BookGrid() {
   const [stories, setStories] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -89,7 +89,13 @@ function BookGrid() {
                   <p className="text-primary leading-relaxed">{selectedBook.description}</p>
                 </div>
               </div>
-              
+              <div className="rating">
+              <div className="mask mask-star" aria-label="1 star"></div>
+              <div className="mask mask-star" aria-label="2 star"></div>
+              <div className="mask mask-star" aria-label="3 star" aria-current="true"></div>
+              <div className="mask mask-star" aria-label="4 star"></div>
+              <div className="mask mask-star" aria-label="5 star"></div>
+              </div>
               <div className="flex space-x-4 pt-6">
                 <button className="px-6 py-3 bg-primary text-background rounded-lg hover:bg-primary/90 transition-colors duration-200">
                   Read Now
@@ -129,4 +135,4 @@ function BookGrid() {
   );
 }
 
-export default BookGrid;
+

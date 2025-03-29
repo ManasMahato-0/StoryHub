@@ -13,11 +13,11 @@ const chapterData = {
   ]
 };
 
-export function Chapter() {
+ function Chapter() {
   return (
     <div className="min-h-screen bg-cream px-4 py-8 md:px-8">
       <Navbar />
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto mt-32">
         {/* Book and Chapter Info */}
         <div className="space-y-2 mb-8">
           <h1 className="text-3xl font-bold text-forest">{chapterData.bookTitle}</h1>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Book, Search, User, ChevronDown, Plus, Check, X, Clock } from 'lucide-react';
-import bg from "./assets/bg.jpg"
 
 function Navbar() {
   const [isGenresOpen, setIsGenresOpen] = useState(false);
@@ -67,7 +66,7 @@ function App() {
   return (
     <div className="min-h-screen bg-cover bg-center bg-fixed" 
          style={{ 
-           backgroundImage:{bg} ,
+           backgroundImage:"url('/colorbg.jpeg')" ,
          }}>
       <Navbar />
       

@@ -4,7 +4,6 @@ import { Book, Search, User, ChevronDown, Plus, Check, X, Clock } from 'lucide-r
 import { SectionCard } from '../components/SectionCard';
 import { Navbar } from '../components/navbar'; 
 
-
 export function Home() {
     const navigate = useNavigate();
 
@@ -94,7 +93,6 @@ export function Home() {
       >
         <Plus className="h-7 w-7" strokeWidth={1.5} />
       </button>
-      
     </div>
     );
 }

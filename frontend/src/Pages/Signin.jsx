@@ -31,7 +31,7 @@ export function Signin() {
       localStorage.setItem("userid", response.data.userId);
       setLoading(false);
       toast.success("Login successful!");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       return toast.error("Invalid Input");
     }

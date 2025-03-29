@@ -1,6 +1,6 @@
 import express from "express";
 import { authMiddleware } from "../middleware.js";
-import { Story } from "../db.js";
+import { Story, User } from "../db.js";
 import cloudinary from "cloudinary";
 
 const router = express.Router();
@@ -18,11 +18,11 @@ const uploadToCloudinary = async (file) => {
 };
 router.post("/post", authMiddleware, async (req, res) => {
     try {
-        if (!req.files || !req.files.imageFile) {
-            return res.status(400).json({ message: "Upload all files" });
-        }
-        const imageFile = req.files.imageFile;
-        const imageUrl = await uploadToCloudinary(imageFile);
+        // if (!req.files || !req.files.imageFile) {
+        //     return res.status(400).json({ message: "Upload all files" });
+        // }
+        // const imageFile = req.files.imageFile;
+        const imageUrl =  null;
         const { title, description, content, likes, genre } = req.body;
         const authorId = req.userId;
         const story = await Story.create({
@@ -159,6 +159,21 @@ router.get("/can-edit/:id", authMiddleware, async (req, res) => {
     }
 });
 
+router.get("/author/:id", authMiddleware, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const author = await User.findById(id).select("-password"); // Exclude password for security
+
+        if (!author) {
+            return res.status(404).json({ message: "Author not found" });
+        }
+
+        return res.status(200).json(author);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Error while fetching author information" });
+    }
+});
 
 
 export default router;

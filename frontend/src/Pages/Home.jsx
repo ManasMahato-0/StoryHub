@@ -87,7 +87,7 @@ export function Home() {
         </div>
       </main>
       
-      <button 
+      <button onClick={()=>{navigate("/createStory")}}
         className="fixed bottom-8 right-8 bg-accent hover:bg-accent/90 text-background rounded-full p-5 shadow-lg hover:shadow-xl transition duration-300 hover:scale-110"
         aria-label="Create new story"
       >

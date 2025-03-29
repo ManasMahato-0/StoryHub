@@ -39,7 +39,7 @@ export function Signup() {
 
       setLoading(false);
       toast.success("Signup successful!");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       setLoading(false);
       console.log(error);
